@@ -5,6 +5,8 @@ jcmro-shop/
 *.cmd
 .DS_Store
 
+.history
+
 dist/
 npm-debug.log*
 yarn-debug.log*
