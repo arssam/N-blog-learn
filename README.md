@@ -1,6 +1,7 @@
 # N-blog-learn
 learn form https://github.com/nswbmw/N-blog
 
-本项目用于记录学习node
+# 项目介绍
 
-home
+基于express，MongoDB做得博客
+模板： ejs
