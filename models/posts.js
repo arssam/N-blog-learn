@@ -93,10 +93,6 @@ module.exports = {
     return Post.update({ _id: postId }, { $set: data }).exec()
   },
 
-  // // 通过文章 id 删除一篇文章
-  // delPostById: function delPostById (postId) {
-  //   return Post.remove({ _id: postId }).exec()
-  // }
   // 通过用户 id 和文章 id 删除一篇文章
   delPostById: function delPostById (postId, author) {
     return Post.remove({ author: author, _id: postId })

@@ -1,8 +1,19 @@
 const path = require('path')
 const express = require('express')
+/**
+ *
+express-session: 会话（session）支持中间件
+connect-mongo: 将 session 存储于 mongodb，需结合 express-session 使用，我们也可以将 session 存储于 redis，如 connect-redis
+connect-flash: 基于 session 实现的用于通知功能的中间件，需结合 express-session 使用
+ */
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const flash = require('connect-flash')
+/**
+ * config-lite 是一个轻量的读取配置文件的模块。
+ * config-lite 会根据环境变量（NODE_ENV）的不同从当前执行进程目录下的 config 目录加载不同的配置文件。
+ * 如果不设置 NODE_ENV，则读取默认的 default 配置文件，如果设置了 NODE_ENV，则会合并指定的配置文件和 default 配置文件作为配置
+ */
 const config = require('config-lite')(__dirname)
 const routes = require('./routes')
 const pkg = require('./package')
@@ -105,3 +116,9 @@ if (module.parent) {
     console.log(`${pkg.name} listening on port ${config.port}`)
   })
 }
+
+/**
+ *
+注意：中间件的加载顺序很重要。如上面设置静态文件目录的中间件应该放到 routes(app) 之前加载，这样静态文件的请求就不会落到业务逻辑的路由里；
+flash 中间件应该放到 session 中间件之后加载，因为 flash 是基于 session 实现的。
+ */
